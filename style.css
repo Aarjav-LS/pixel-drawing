@@ -1,0 +1,47 @@
+.container {
+  display: grid;
+  height: 100vh;
+  place-items: center;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(100, 1fr);
+  height: 1500px;
+  width: 1500px;
+}
+
+.cell {
+  border: 1px solid lightblue;
+}
+
+.palette {
+  position: fixed;
+  bottom: 0;
+  left: 150px;
+
+  display: grid;
+  width: 250px;
+  height: 50px;
+
+  grid-template-columns: repeat(5, 1fr);
+  border: 5px solid black;
+
+  .color {
+    &:nth-child(1) {
+      background-color: tan;
+    }
+    &:nth-child(2) {
+      background-color: red;
+    }
+    &:nth-child(3) {
+      background-color: blue;
+    }
+    &:nth-child(4) {
+      background-color: white;
+    }
+    &:nth-child(5) {
+      background-color: green;
+    }
+  }
+}
