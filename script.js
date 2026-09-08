@@ -6,8 +6,11 @@ document.addEventListener("DOMContentLoaded", function () {
   let isMouseDown = false;
   const STORAGE_KEY = "pixelGrid";
 
+  // Function to save the current grid state to localStorage
   const saveGrid = () => {
-    const colors = Array.from(cells).map(cell => cell.style.backgroundColor || "");
+    const colors = Array.from(cells).map(
+      (cell) => cell.style.backgroundColor || "",
+    );
     localStorage.setItem(STORAGE_KEY, JSON.stringify(colors));
   };
 
@@ -49,6 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
     isMouseDown = false;
   });
 
+  // Load saved grid from localStorage
   const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
   cells.forEach((cell, i) => {
     if (saved[i]) {

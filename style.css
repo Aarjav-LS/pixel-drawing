@@ -18,7 +18,9 @@
 .palette {
   position: sticky;
   bottom: 0;
-  left: 150px;
+  z-index: 9999;
+  left: 50%;
+  transform: translateX(-50%);
 
   display: grid;
   width: 250px;
