@@ -4,7 +4,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   let currentColor = "black";
   let isMouseDown = false;
+  let brushSize = 1;
   const STORAGE_KEY = "pixelGrid";
+  const GRID_SIZE = 100;
 
   // Function to save the current grid state to localStorage
   const saveGrid = () => {
@@ -14,8 +16,23 @@ document.addEventListener("DOMContentLoaded", function () {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(colors));
   };
 
-  const activate = (event) => {
-    event.target.style.backgroundColor = currentColor;
+  const paintArea = (centerCell) => {
+    const index = Array.from(cells).indexOf(centerCell);
+    if (index === -1) return;
+
+    const col = index % GRID_SIZE;
+    const row = Math.floor(index / GRID_SIZE);
+
+    // brushSize 1 = 1 pixel, larger sizes = centered square
+    const radius = brushSize - 1;
+
+    for (let r = row - radius; r <= row + radius; r++) {
+      for (let c = col - radius; c <= col + radius; c++) {
+        if (r >= 0 && r < GRID_SIZE && c >= 0 && c < GRID_SIZE) {
+          cells[r * GRID_SIZE + c].style.backgroundColor = currentColor;
+        }
+      }
+    }
   };
 
   const changeColor = (event) => {
@@ -23,6 +40,15 @@ document.addEventListener("DOMContentLoaded", function () {
   };
   colors.forEach((color) => {
     color.addEventListener("click", changeColor);
+  });
+
+  const brushSizes = document.querySelectorAll(".brush-size");
+  brushSizes.forEach((size) => {
+    size.addEventListener("click", () => {
+      brushSizes.forEach((s) => s.classList.remove("active"));
+      size.classList.add("active");
+      brushSize = parseInt(size.attributes["data-size"].value, 10);
+    });
   });
 
   for (let i = 0; i < 100 * 100; i++) {
@@ -37,10 +63,10 @@ document.addEventListener("DOMContentLoaded", function () {
   cells.forEach((cell) => {
     cell.addEventListener("mousedown", () => {
       isMouseDown = true;
-      activate({ target: cell });
+      paintArea(cell);
     });
     cell.addEventListener("mouseover", () => {
-      if (isMouseDown) activate({ target: cell });
+      if (isMouseDown) paintArea(cell);
     });
     cell.addEventListener("mouseup", () => {
       isMouseDown = false;
