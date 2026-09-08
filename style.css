@@ -6,7 +6,7 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(100, 1fr);
+  grid-template-columns: repeat(200, 1fr);
   height: 1500px;
   width: 1500px;
 }
@@ -16,7 +16,7 @@
 }
 
 .palette {
-  position: fixed;
+  position: sticky;
   bottom: 0;
   left: 150px;
 

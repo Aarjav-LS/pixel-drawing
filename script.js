@@ -4,9 +4,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
   let currentColor = "black";
   let isMouseDown = false;
+  const STORAGE_KEY = "pixelGrid";
+
+  const saveGrid = () => {
+    const colors = Array.from(cells).map(cell => cell.style.backgroundColor || "");
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(colors));
+  };
 
   const activate = (event) => {
     event.target.style.backgroundColor = currentColor;
+    saveGrid();
   };
 
   const changeColor = (event) => {
@@ -16,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
     color.addEventListener("click", changeColor);
   });
 
-  for (let i = 0; i < 100 * 100; i++) {
+  for (let i = 0; i < 200 * 200; i++) {
     const cell = document.createElement("div");
     cell.classList.add("cell");
 
@@ -40,5 +47,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
   document.addEventListener("mouseup", () => {
     isMouseDown = false;
+  });
+
+  const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+  cells.forEach((cell, i) => {
+    if (saved[i]) {
+      cell.style.backgroundColor = saved[i];
+    }
   });
 });
