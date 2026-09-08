@@ -6,9 +6,9 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(200, 1fr);
-  height: 1500px;
-  width: 1500px;
+  grid-template-columns: repeat(100, 1fr);
+  height: 1000px;
+  width: 1000px;
 }
 
 .cell {
@@ -20,14 +20,14 @@
   bottom: 0;
 
   left: 50%;
-  transform: translateX(-50%);
+
   z-index: 9999;
 
   display: grid;
-  width: 250px;
+  width: 300px;
   height: 50px;
 
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   border: 5px solid black;
 
   .color {
@@ -45,6 +45,9 @@
     }
     &:nth-child(5) {
       background-color: green;
+    }
+    &:nth-child(6) {
+      background-color: black;
     }
   }
 }
