@@ -16,11 +16,12 @@
 }
 
 .palette {
-  position: sticky;
+  position: fixed;
   bottom: 0;
-  z-index: 9999;
+
   left: 50%;
   transform: translateX(-50%);
+  z-index: 9999;
 
   display: grid;
   width: 250px;
