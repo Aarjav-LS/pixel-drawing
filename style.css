@@ -2,13 +2,15 @@
   display: grid;
   height: 100vh;
   place-items: center;
+  flex: 1;
+  overflow: auto;
 }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(100, 1fr);
-  height: 1000px;
-  width: 1000px;
+  height: 200vh;
+  width: 200vh;
 }
 
 .cell {
@@ -17,7 +19,7 @@
 
 .palette {
   position: fixed;
-  bottom: 0;
+  bottom: 1%;
 
   left: 10%;
 
